@@ -43,8 +43,8 @@ if { [string first $scripts_vivado_version $current_vivado_version] == -1 } {
 
 set list_projs [get_projects -quiet]
 if { $list_projs eq "" } {
-   create_project project_1 myproj -part xczu3cg-sbva484-1-e
-   set_property BOARD_PART nextgenrf.com:bytepipe_3cg_som:part0:1.0 [current_project]
+   create_project project_1 myproj -part xczu3eg-sbva484-1-e
+   set_property BOARD_PART nextgenrf.com:bytepipe_3eg_som:part0:1.0 [current_project]
 }
 
 
@@ -89,7 +89,7 @@ if { ${design_name} eq "" } {
    set errMsg "Design <$design_name> already exists in your project, please set the variable <design_name> to another value."
    set nRet 1
 } elseif { [get_files -quiet ${design_name}.bd] ne "" } {
-   # USE CASES: 
+   # USE CASES:
    #    6) Current opened design, has components, but diff names, design_name exists in project.
    #    7) No opened design, design_name exists in project.
 
@@ -123,7 +123,7 @@ set bCheckIPsPassed 1
 ##################################################################
 set bCheckIPs 1
 if { $bCheckIPs == 1 } {
-   set list_check_ips "\ 
+   set list_check_ips "\
 xilinx.com:ip:xlconstant:1.1\
 analog.com:user:axi_adrv9001:1.0\
 analog.com:user:axi_dmac:1.0\
