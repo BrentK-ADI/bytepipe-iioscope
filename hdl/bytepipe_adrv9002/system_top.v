@@ -145,7 +145,7 @@ module system_top (
   assign gpio_tx2_enable_in = gpio_o[51];
 
   assign gpio_i[31: 0] = gpio_o[31:0];
-  assign gpio_i[45] = gpio_o[45];  
+  assign gpio_i[45] = gpio_o[45];
   assign gpio_i[54:47] = gpio_o[54:47];
   assign gpio_i[55] = 0;
   assign gpio_i[94:56] = gpio_o[94:56];

@@ -3,18 +3,16 @@ set wrkDir [pwd]
 set srcDir [file dirname [file normalize [ info script ] ] ]
 
 set mode [lindex $argv 0]
+set part [lindex $argv 1]
 if {($mode ne "lvds") && ($mode ne "cmos")} {
   return -code error [format "ERROR: mode $mode NOT supported! Select lvds or cmos."]
 }
 
 # Set Vivado Project Name
-set project_name iio_$mode
+set project_name iio_${part}_${mode}
 
 # Create Project
-create_project $project_name $wrkDir/$mode -part xczu3cg-sbva484-1-e -force
-
-# Set Board File
-set_property board_part nextgenrf.com:bytepipe_3cg_som:part0:1.0 [current_project]
+create_project $project_name $wrkDir/$mode -part $part -force
 
 # Add Source Files
 add_files -fileset constrs_1 -norecurse $srcDir/bytepipe_system_constr.xdc
@@ -67,6 +65,6 @@ wait_on_run -quiet impl_1
 
 # Export Hardware Defintion Files
 update_compile_order -fileset sources_1
-file copy -force $wrkDir/$mode/$project_name.runs/impl_1/system_top.sysdef $wrkDir/system_$mode.hdf
+write_hw_platform -fixed -force -include_bit -file $wrkDir/system_${part}_${mode}.xsa
 
 exit

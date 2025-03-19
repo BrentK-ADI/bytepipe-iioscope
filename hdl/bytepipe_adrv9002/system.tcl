@@ -89,7 +89,7 @@ if { ${design_name} eq "" } {
    set errMsg "Design <$design_name> already exists in your project, please set the variable <design_name> to another value."
    set nRet 1
 } elseif { [get_files -quiet ${design_name}.bd] ne "" } {
-   # USE CASES: 
+   # USE CASES:
    #    6) Current opened design, has components, but diff names, design_name exists in project.
    #    7) No opened design, design_name exists in project.
 
@@ -123,7 +123,7 @@ set bCheckIPsPassed 1
 ##################################################################
 set bCheckIPs 1
 if { $bCheckIPs == 1 } {
-   set list_check_ips "\ 
+   set list_check_ips "\
 xilinx.com:ip:xlconstant:1.1\
 analog.com:user:axi_adrv9001:1.0\
 analog.com:user:axi_dmac:1.0\
@@ -170,7 +170,6 @@ if { $bCheckIPsPassed != 1 } {
 # procedure reusable. If parentCell is "", will use root.
 proc create_root_design { parentCell } {
 
-  variable script_folder
   variable design_name
 
   if { $parentCell eq "" } {
@@ -364,7 +363,7 @@ proc create_root_design { parentCell } {
   # Create instance: rom_sys_0, and set properties
   set rom_sys_0 [ create_bd_cell -type ip -vlnv analog.com:user:sysid_rom:1.0 rom_sys_0 ]
   set_property -dict [ list \
-   CONFIG.PATH_TO_FILE {$script_folder/mem_init_sys.txt} \
+   CONFIG.PATH_TO_FILE {${script_folder}/mem_init_sys.txt} \
    CONFIG.ROM_ADDR_BITS {9} \
  ] $rom_sys_0
 
